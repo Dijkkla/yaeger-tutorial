@@ -5,7 +5,7 @@ import com.github.hanyaeger.api.Coordinate2D;
 import com.github.hanyaeger.api.scenes.DynamicScene;
 import com.github.hanyaeger.tutorial.Waterworld;
 import com.github.hanyaeger.tutorial.entities.Lad;
-import com.github.hanyaeger.tutorial.entities.Swordfish;
+import com.github.hanyaeger.tutorial.entities.swordfish.Swordfish;
 import com.github.hanyaeger.tutorial.entities.text.HealthText;
 
 public class GameLevel extends DynamicScene {
