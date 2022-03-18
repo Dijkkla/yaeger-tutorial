@@ -13,24 +13,32 @@ import com.github.hanyaeger.api.entities.impl.DynamicSpriteEntity;
 import com.github.hanyaeger.api.scenes.SceneBorder;
 import com.github.hanyaeger.api.userinput.KeyListener;
 import com.github.hanyaeger.tutorial.Waterworld;
+import com.github.hanyaeger.tutorial.entities.bubbles.AirBubble;
+import com.github.hanyaeger.tutorial.entities.text.BubblesPoppedText;
 import com.github.hanyaeger.tutorial.entities.text.HealthText;
 
 import javafx.scene.input.KeyCode;
 
-public class Lad extends DynamicSpriteEntity implements KeyListener,SceneBorderTouchingWatcher,Newtonian,Collided {
+public class Lad extends DynamicSpriteEntity implements KeyListener,SceneBorderTouchingWatcher,Newtonian,Collided,Collider {
 	
 	private Waterworld waterworld;
 	
 	private HealthText healthText;
 	private int health = 10;
 	
-	public Lad(Coordinate2D location, HealthText healthText, Waterworld waterworld){
+	private BubblesPoppedText bubblesPoppedText;
+	private int bubblesPopped = 0;
+	
+	public Lad(Coordinate2D location, HealthText healthText, BubblesPoppedText bubblesPoppedText, Waterworld waterworld){
 	    super("sprites/hanny.png", location, new Size(20,40), 1, 2);
 
 	    this.waterworld = waterworld;
 	    
 	    this.healthText = healthText;
 	    healthText.setHealthText(health);
+	    
+	    this.bubblesPoppedText = bubblesPoppedText;
+	    bubblesPoppedText.setBubblesPoppedText(bubblesPopped);
 	    
 	    setGravityConstant(0.005);
 	    setFrictionConstant(0.04);
@@ -74,16 +82,18 @@ public class Lad extends DynamicSpriteEntity implements KeyListener,SceneBorderT
 
 	@Override
 	public void onCollision(Collider collidingObject){
-	    setAnchorLocation(
-	        new Coordinate2D(new Random().nextInt((int)(getSceneWidth() - getWidth())),
-	        new Random().nextInt((int)(getSceneHeight() - getHeight())))
-	    );
+	    if (collidingObject instanceof AirBubble){
+	        bubblesPoppedText.setBubblesPoppedText(++bubblesPopped);
+	    } else {
+	        healthText.setHealthText(--health);
 
-	    health--;
-	    healthText.setHealthText(health);
-	    
-	    if (health <= 0) {
-	    	waterworld.setActiveScene(2);
+	        if (health <= 0){
+	            this.waterworld.setActiveScene(2);
+	        } else {
+	            setAnchorLocation(new Coordinate2D(
+	                new Random().nextInt((int)(getSceneWidth() - getWidth())),
+	                new Random().nextInt((int)(getSceneHeight() - getHeight()))));
+	        }
 	    }
 	}
 

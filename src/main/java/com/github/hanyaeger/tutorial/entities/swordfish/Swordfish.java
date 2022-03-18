@@ -25,7 +25,7 @@ public class Swordfish extends DynamicCompositeEntity implements SceneBorderCros
 		var swordfishSprite = new SwordfishSprite(new Coordinate2D(0, 0));
 		addEntity(swordfishSprite);
 
-		var hitBox = new HitBox(new Coordinate2D(0, 39));
+		var hitBox = new SwordfishHitBox(new Coordinate2D(0, 39));
 		addEntity(hitBox);
 	}
 
