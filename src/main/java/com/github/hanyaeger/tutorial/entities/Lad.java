@@ -14,6 +14,7 @@ import com.github.hanyaeger.api.scenes.SceneBorder;
 import com.github.hanyaeger.api.userinput.KeyListener;
 import com.github.hanyaeger.tutorial.Waterworld;
 import com.github.hanyaeger.tutorial.entities.bubbles.AirBubble;
+import com.github.hanyaeger.tutorial.entities.map.Coral;
 import com.github.hanyaeger.tutorial.entities.text.BubblesPoppedText;
 import com.github.hanyaeger.tutorial.entities.text.HealthText;
 
@@ -82,7 +83,9 @@ public class Lad extends DynamicSpriteEntity implements KeyListener,SceneBorderT
 
 	@Override
 	public void onCollision(Collider collidingObject){
-	    if (collidingObject instanceof AirBubble){
+	    if (collidingObject instanceof Coral) {
+	    	setSpeed(0);
+	    } else if (collidingObject instanceof AirBubble){
 	        bubblesPoppedText.setBubblesPoppedText(++bubblesPopped);
 	    } else {
 	        healthText.setHealthText(--health);
