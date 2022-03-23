@@ -15,7 +15,7 @@ import javafx.scene.text.FontWeight;
 
 public class QuitButton extends TextEntity implements MouseButtonPressedListener,MouseEnterListener,MouseExitListener {
 
-private Waterworld waterworld;
+	private Waterworld waterworld;
 	
 	public QuitButton(Coordinate2D initialLocation, Waterworld waterworld){
 	    super(initialLocation,"Quit game");

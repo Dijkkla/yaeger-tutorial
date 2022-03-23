@@ -10,17 +10,19 @@ import com.github.hanyaeger.api.entities.Collider;
 import com.github.hanyaeger.api.entities.Newtonian;
 import com.github.hanyaeger.api.entities.SceneBorderTouchingWatcher;
 import com.github.hanyaeger.api.entities.impl.DynamicSpriteEntity;
+import com.github.hanyaeger.api.media.SoundClip;
 import com.github.hanyaeger.api.scenes.SceneBorder;
 import com.github.hanyaeger.api.userinput.KeyListener;
 import com.github.hanyaeger.tutorial.Waterworld;
 import com.github.hanyaeger.tutorial.entities.bubbles.AirBubble;
+import com.github.hanyaeger.tutorial.entities.bubbles.Bubble;
 import com.github.hanyaeger.tutorial.entities.map.Coral;
 import com.github.hanyaeger.tutorial.entities.text.BubblesPoppedText;
 import com.github.hanyaeger.tutorial.entities.text.HealthText;
 
 import javafx.scene.input.KeyCode;
 
-public class Lad extends DynamicSpriteEntity implements KeyListener,SceneBorderTouchingWatcher,Newtonian,Collided,Collider {
+public class Lad extends DynamicSpriteEntity implements KeyListener,SceneBorderTouchingWatcher,Newtonian,Collided {
 	
 	private Waterworld waterworld;
 	
@@ -31,7 +33,7 @@ public class Lad extends DynamicSpriteEntity implements KeyListener,SceneBorderT
 	private int bubblesPopped = 0;
 	
 	public Lad(Coordinate2D location, HealthText healthText, BubblesPoppedText bubblesPoppedText, Waterworld waterworld){
-	    super("sprites/hanny.png", location, new Size(20,40), 1, 2);
+	    super("sprites/hanny.png", location, new Size(20,40), 2, 2);
 
 	    this.waterworld = waterworld;
 	    
@@ -97,6 +99,13 @@ public class Lad extends DynamicSpriteEntity implements KeyListener,SceneBorderT
 	                new Random().nextInt((int)(getSceneWidth() - getWidth())),
 	                new Random().nextInt((int)(getSceneHeight() - getHeight()))));
 	        }
+	    }
+	    
+	    if (collidingObject instanceof Bubble) {
+		    var popSound = new SoundClip("audio/pop.mp3");
+		    popSound.play();
+	
+		    ((Bubble) collidingObject).remove();
 	    }
 	}
 

@@ -25,7 +25,7 @@ public class Shark extends DynamicCompositeEntity implements SceneBorderCrossing
 		var sharkSprite = new SharkSprite(new Coordinate2D(0, 0));
 		addEntity(sharkSprite);
 
-		var hitBox = new SharkHitBox(new Coordinate2D(335, 190));
+		var hitBox = new SharkHitBox(new Coordinate2D(335, 190), 40, 70);
 		addEntity(hitBox);
 	}
 

@@ -8,10 +8,12 @@ import javafx.scene.paint.Color;
 
 public class SharkHitBox extends RectangleEntity implements Collider {
 
-    public SharkHitBox(final Coordinate2D initialPosition) {
+    public SharkHitBox(final Coordinate2D initialPosition, int width, int height) {
         super(initialPosition);
-        setWidth(40);
-        setHeight(70);
+        setWidth(width);
+        setHeight(height);
         setFill(Color.TRANSPARENT);
     }
 }
+
+// LifeformHitbox(initialPosition:final Coordinate2D , width:int, height:int) : LifeformHitbox
