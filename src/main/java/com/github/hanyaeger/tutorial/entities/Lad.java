@@ -33,7 +33,7 @@ public class Lad extends DynamicSpriteEntity implements KeyListener,SceneBorderT
 	private int bubblesPopped = 0;
 	
 	public Lad(Coordinate2D location, HealthText healthText, BubblesPoppedText bubblesPoppedText, Waterworld waterworld){
-	    super("sprites/hanny.png", location, new Size(20,40), 2, 2);
+	    super("sprites/hanny.png", location, new Size(20,20), 2, 2);
 
 	    this.waterworld = waterworld;
 	    
@@ -57,8 +57,10 @@ public class Lad extends DynamicSpriteEntity implements KeyListener,SceneBorderT
 	        setCurrentFrameIndex(1);
 	    } else if(pressedKeys.contains(KeyCode.UP)){
 	        setMotion(3,180d);
+	        setCurrentFrameIndex(2);
 	    } else if(pressedKeys.contains(KeyCode.DOWN)){
 	        setMotion(3,0d);
+	        setCurrentFrameIndex(3);
 	    }
 	}
 	
